@@ -2,7 +2,6 @@
 
 ; 5^5 kinds
 
-
 (define (multiple-dwelling)
   (let ((baker (amb 1 2 3 4))
         (cooper (amb 2 3 4 5)))
