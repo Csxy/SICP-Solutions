@@ -1,0 +1,23 @@
+#lang planet neil/sicp
+
+(define (lier)
+  (let ((betty (amb 1 2 3 4 5))
+        (aysel (amb 1 2 3 4 5))
+        (joan  (amb 1 2 3 4 5))
+        (katie (amb 1 2 3 4 5))
+        (mary  (amb 1 2 3 4 5)))
+    (require (xor (= katie 2) (= betty 3)))
+    (require (xor (= aysel 1) (= joan 2)))
+    (require (xor (= joan 3) (= aysel 5)))
+    (require (xor (= katie 2) (= mary 4)))
+    (require (xor (= mary 4) (= betty 1)))
+    (require
+      (distinct? (list betty aysel joan katie mary)))
+    (list (list 'betty betty)
+          (list 'aysel aysel)
+          (list 'joan joan)
+          (list 'katie katie)
+          (list 'mary mary))))
+(define (xor a b)
+  (or (and a (not b))
+      (and (not a) b)))
