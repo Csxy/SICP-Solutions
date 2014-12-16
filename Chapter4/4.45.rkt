@@ -54,6 +54,7 @@
                 (pre-phrase (prep with)
                             (simple-noun-phrase
                              (article the) (noun cat)))))))
+                             
 
 ;4
 ;The professor [lectures to (the student in the class)] with the cat
