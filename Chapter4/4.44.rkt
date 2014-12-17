@@ -7,7 +7,7 @@
         (let ((new (an-integer-between 1 board-size)))
           (require (safe? new positions))
           (queen-cols (+ k 1) (cons new positions)))))
-  (queen-cols 0 (list)))
+  (queen-cols 0 '()))
 
 (define (safe? k solution)
   (define (attack? row col)
