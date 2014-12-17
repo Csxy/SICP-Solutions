@@ -15,7 +15,7 @@
 
 ;②
 (define (lorna-father)
-  (let ((moore (amb 'mary 'gabrielle 'lorna 'rosalind))
+  (let ((moore (amb 'mary 'gabrielle 'rosalind))
         (barnacle 'melissa)
         (downing (amb 'mary 'gabrielle 'lorna 'rosalind))
         (hall (amb 'mary 'gabrielle 'lorna))
