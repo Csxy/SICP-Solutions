@@ -324,8 +324,7 @@
 ;  (set-car! frame (cons var (car frame)))
 ;  (set-cdr! frame (cons val (cdr frame))))
 (define (add-binding-to-frame! var val frame)
-  (set-cdr! frame (cons (make-binding var val) (cdr frame))))
-
+  (cons (make-binding var val) frame))
 ;(define (extend-environment vars vals base-env)
 ;  (if (= (length vars) (length vals))
 ;      (cons (make-frame vars vals) base-env)
@@ -444,7 +443,7 @@
   (let ((result (scan var (first-frame env))))
     (if result
         (set-cdr! result val)
-        (add-binding-to-frame! var val (first-frame env)))))
+        (set-car! env (add-binding-to-frame! var val (first-frame env))))))
 ;4.13
 (define (clean? exp)
   (tagged-list? exp 'clean!))
