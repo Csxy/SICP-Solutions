@@ -3,7 +3,7 @@
 (define (multiple-dwelling)
   (let ((baker (amb 1 2 3 4 5))
         (cooper (amb 1 2 3 4 5))
-        (filetcher (amb 1 2 3 4 5))
+        (fletcher (amb 1 2 3 4 5))
         (miller (amb 1 2 3 4 5))
         (smith (amb 1 2 3 4 5)))
     (require
