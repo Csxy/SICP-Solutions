@@ -7,7 +7,7 @@
         (let ((new (an-integer-between 1 board-size)))
           (require (safe? new positions))
           (queen-cols (+ k 1) (cons new positions)))))
-  (queen-cols 0 '()))
+  (queen-cols 0 (list)))
 
 (define (safe? k solution)
   (define (attack? row col)
@@ -15,7 +15,7 @@
         (= k (+ row col))
         (= k (- row col))))
   (define (check rest i)
-    (cond ((null? rest) #t) 
-          ((conflict? (car rest) i) #f) 
+    (cond ((null? rest) true) 
+          ((conflict? (car rest) i) false) 
           (else (check (cdr rest) (+ i 1)))))
   (check solution 1))
