@@ -6,4 +6,4 @@
 ;(job ?x (accounting . ?type))
 
 ;c)
-;(address ?x (Slumerville . ?name))
+;(address ?x (Slumerville . ?where))
