@@ -1,13 +1,14 @@
 #lang planet neil/sicp
 
 (define (conjoin conjuncts frame-stream)
-  (if (empty-conjunction? (rest-conjuncts conjuncts))
-      (qeval (first-conjunct conjuncts)
-             frame-stream)
-      (stream-match (qeval (first-conjunct conjuncts)
-                           frame-stream)
-                    (conjoin (rest-conjuncts conjuncts) 
-                             frame-stream)))) 
+  (cond ((empty-conjunction? conjuncts) frame-stream)
+        ((empty-conjunction? (rest-conjuncts conjuncts))
+         (qeval (first-conjunct conjuncts)
+                frame-stream))
+        (else (stream-match (qeval (first-conjunct conjuncts)
+                                   frame-stream)
+                            (conjoin (rest-conjuncts conjuncts) 
+                                     frame-stream))))) 
 
 (define (stream-match stream-1 stream-2)
   (stream-flatmap
@@ -36,6 +37,6 @@
                            (binding-value first-binding))
                    (iter (cdr frame) result))
                   (else 'failed))))))
- (iter frame-1 frame-2))
+  (iter frame-1 frame-2))
 
 (put 'and 'qeval conjoin)
