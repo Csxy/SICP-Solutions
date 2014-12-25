@@ -95,7 +95,6 @@
                 frame))))
 (put 'or 'qeval disjoin)
 
-;
 
 (define (find-assertions pattern frame)
   (let ((datum (an-element-of (fetch-assertions pattern frame))))
