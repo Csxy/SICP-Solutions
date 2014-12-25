@@ -1,5 +1,4 @@
-;只实现了简单查询的4.78
-;other definitions
+
 (define (make-table)
   (let ((local-table (list '*table*)))
     (define (lookup key-1 key-2)
@@ -45,7 +44,6 @@
       (eq? (car exp) tag)
       false))
 
-;query
 (define (query input)
   (let ((q (query-syntax-process input)))
     (instantiate q 
@@ -67,7 +65,7 @@
            (cons (copy (car exp)) (copy (cdr exp))))
           (else exp)))
   (copy exp))
-;这里暂时只实现了simple-query
+
 (define (qeval query frame)
   (let ((qproc (get (type query) 'qeval)))
     (if qproc
@@ -79,6 +77,25 @@
        (apply-rules query frame)))
 (define (always-true ignore frame) frame)
 (put 'always-true 'qeval always-true)
+
+(define (conjoin conjuncts frame)
+  (if (empty-conjunction? conjuncts)
+      frame
+      (conjoin (rest-conjuncts conjuncts)
+               (qeval (first-conjunct conjuncts)
+                      frame))))
+(put 'and 'qeval conjoin)
+
+(define (disjoin disjuncts frame)
+  (if (empty-disjunction? disjuncts)
+      (amb)
+      (amb
+       (qeval (first-disjunct disjuncts) frame)
+       (disjoin (rest-disjuncts disjuncts)
+                frame))))
+(put 'or 'qeval disjoin)
+
+;
 
 (define (find-assertions pattern frame)
   (let ((datum (an-element-of (fetch-assertions pattern frame))))
@@ -101,7 +118,7 @@
 (define (extend-if-consistent var dat frame)
   (let ((binding (binding-in-frame var frame)))
     (if binding
-        (pattern-match (binding-value binding) date frame)
+        (pattern-match (binding-value binding) dat frame)
         (extend var dat frame))))
 
 
@@ -254,8 +271,17 @@
   (if (pair? exp)
       (cdr exp)
       (error "Unkonwn expression CONTENTS" exp)))
+(define (empty-conjunction? exps) (null? exps))
+(define (first-conjunct exps) (car exps))
+(define (rest-conjuncts exps) (cdr exps))
 
+(define (empty-disjunction? exps) (null? exps))
+(define (first-disjunct exps) (car exps))
+(define (rest-disjuncts exps) (cdr exps))
 
+(define (negated-query exps) (car exps))
+(define (predicate exps) (car exps))
+(define (args exps) (cdr exps))
 
 (define (rule? statement)
   (tagged-list? statement 'rule))
@@ -311,4 +337,3 @@
   (assoc variable frame))
 (define (extend variable value frame)
   (cons (make-binding variable value) frame))
-
