@@ -1,5 +1,5 @@
 ;run it in amb-query.rkt
-;
+;https://github.com/Csxy/SICP-Solutions/blob/master/Chapter4/amb-query.rkt
 ;
 
 ;for "get" "put"
