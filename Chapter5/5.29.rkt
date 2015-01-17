@@ -1,6 +1,6 @@
 #lang planet neil/sicp
 
-;       |   Maximum depth  |  Number of pushes
+;       | Number of pushes |   Maximum depth
 ;---------------------------------------------
 ;   2   |        72        |        13	
 ;---------------------------------------------
